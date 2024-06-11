@@ -8,7 +8,7 @@ namespace StudentApp
 {
   public  class Repositories
     {
-    public static string path="LENOVO\\SQLEXPRESS;Initial Catalog=test_school;Integrated Security=True";
+    public static string path=".\\SQLEXPRESS;Initial Catalog=test_school;Integrated Security=True";
         public static void InsertStudDetails(StudDetails student)
         {
             int Class = student.Class;
