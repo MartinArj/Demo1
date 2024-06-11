@@ -1,0 +1,121 @@
+﻿<Page x:Class="StudentApp.AdddStaff"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+    Background="White"
+      ShowsNavigationUI="False"
+      d:DesignHeight="500" d:DesignWidth="700"
+	Title="AddStaff">
+
+    <Grid>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="500" CornerRadius="20,30,40,20" BorderThickness="1,2,3,1" BorderBrush="Pink" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel x:Name="AddStaffDetail_pannel" Visibility="Visible" >
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,10,0,10">
+                            <TextBlock Text="Name:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="name"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="Date of berth:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="dob" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="Qualification:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="Qualification" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="JoiningYear:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="joiningyear"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="PreviousExperience:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Height="30" Width="70" Content="Next" x:Name="address" Click="address_Click_1" HorizontalAlignment="Right"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="address_pannel" Visibility="Collapsed">
+                    <Grid>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Center">
+                            <TextBlock FontSize="22">ENTER YOUR ADDRESS HEAR..</TextBlock>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                            <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="Door No:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="Street:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="Village:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="City:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="State:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                <TextBlock Height="30" Width="190" Text="Pin Code:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
+                                <TextBlock Height="30" Width="190" Text="Mail Id:" FontSize="20" />
+                                <TextBox Height="30" Width="200"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10" >
+                            <Button Height="30" Width="70" Content="previous" x:Name="staff_detail" Click="staff_detail_Click_1" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                            <Button Width="70" Content="Next" x:Name="Phone_number" Click="Phone_number_Click_1" Height="30" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </Grid>
+
+                </StackPanel>
+                <StackPanel x:Name="mobile_number_pannel" Margin="1" Visibility="Collapsed">
+                    <StackPanel Margin="0 0 0 20">
+                        <TextBlock Height="30" Text="ENTER MOBILE NUMBER.." FontSize="22" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Height="30" Width="190" Text="Mobile No:" FontSize="20"/>
+                        <TextBox Height="30" Width="200" Name="mobile_no"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                        <RadioButton Content="official" GroupName="number_type" FontSize="20"  Margin="10 10 10 10"/>
+                        <RadioButton Content="personal"  FontSize="20" GroupName="number_type"   Margin="50 10 10 10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                        <Button Height="30" Width="90" Content="privious" x:Name="privious_address" Click="privious_address_Click_1" Margin="0 0 10 0"/>
+                        <Button Height="30" Width="90" Content="Another One" x:Name="NewMobileNumber" Click="NewMobileNumber_Click_1"  Margin="0 0 10 0"/>
+                        <Button Height="30" Width="90" Content="Done" x:Name="complete" Click="complete_Click_1"  Margin="0 0 10 0"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+
+
+            </StackPanel>
+
+
+        </Border>
+    </Grid>
+</Page>
