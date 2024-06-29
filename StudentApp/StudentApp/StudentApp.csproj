@@ -56,8 +56,11 @@
     <Compile Include="AddStudent.xaml.cs">
       <DependentUpon>AddStudent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="AddSubject.xaml.cs">
+      <DependentUpon>AddSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Alllogin.xaml.cs">
+      <DependentUpon>Alllogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="MarkEntry.xaml.cs">
       <DependentUpon>MarkEntry.xaml</DependentUpon>
@@ -68,9 +71,6 @@
     <Compile Include="staffMobileNumber.cs" />
     <Compile Include="StudDetails.cs" />
     <Compile Include="StudentsMarks.cs" />
-    <Compile Include="StudentSubject.xaml.cs">
-      <DependentUpon>StudentSubject.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SubAndStaffRelation.cs" />
     <Compile Include="SubjectDetails.cs" />
     <Page Include="AddStaff.xaml">
@@ -81,7 +81,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="AddSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Alllogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,10 +108,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MarkEntry.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StudentSubject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

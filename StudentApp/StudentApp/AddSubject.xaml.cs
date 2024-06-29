@@ -19,9 +19,12 @@ namespace StudentApp
     /// </summary>
     public partial class AddSubject : Page
     {
+        public List<int> class_no { get; set; }
         public AddSubject()
         {
             InitializeComponent();
+            class_no = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            clas.ItemsSource = class_no;
         }
     }
 }
