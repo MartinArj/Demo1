@@ -67,6 +67,12 @@
     <Compile Include="StudentsMarks.cs" />
     <Compile Include="SubAndStaffRelation.cs" />
     <Compile Include="SubjectDetails.cs" />
+    <Compile Include="TeacherOptions.xaml.cs">
+      <DependentUpon>TeacherOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="temp.xaml.cs">
+      <DependentUpon>temp.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddStaff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +100,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MarkEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeacherOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="temp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
