@@ -56,6 +56,12 @@
     <Compile Include="AddStudent.xaml.cs">
       <DependentUpon>AddStudent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddSubject.xaml.cs">
+      <DependentUpon>AddSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Alllogin.xaml.cs">
+      <DependentUpon>Alllogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MarkEntry.xaml.cs">
       <DependentUpon>MarkEntry.xaml</DependentUpon>
     </Compile>
@@ -78,6 +84,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Alllogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +150,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

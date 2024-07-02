@@ -1,0 +1,33 @@
+﻿create table StudDetails(RollNo int not null,Class int not null,Section varchar(2) not null,foreign key(class,Section,year) references ClassDetails(class,Section,year),Year varchar(4)not null,Name varchar(25)not null,DateOfBirth varchar(10)not null,Blood_Group varchar(3),primary key(rollno,Class,Section,Year),ActiveOrInActive bit default 1)
+create table StudAddress(AddressId int Identity(1,1),rollno int not null,Class int not null,Section varchar(2)not null,Year varchar(4)not null,DoorNo Varchar(5) not null,Street varchar(25) not null,Village varchar(25) not null,City varchar(20)not null,State varchar(20) not null,Pin_Code varchar(6) not null,Mobile_Number varchar(13) not null,Mail_Id varchar(50) not null,Address_Type bit default 1 not null,primary key(AddressId,rollno,Class,Section,Year),foreign key (rollno,Class, Section,Year)references StudDetails(rollno,Class,Section,Year)) 
+create table StaffAddress(AddressId int Identity(1,1),StaffId int not null foreign key references StaffDetails(StaffId),DoorNo Varchar(5) not null,Street varchar(25) not null,Village varchar(25) not null,City varchar(20)not null,State varchar(20) not null,Pin_Code varchar(6) not null,Mail_Id varchar(50) not null,AddressType bit default 1,primary key(AddressId,StaffId)) 
+create table StaffMobile_Number(MobileId int Identity(1,1) not null,StaffId int not null foreign key references StaffDetails(StaffId),Mobile_Number varchar(13),type varchar(10) not null,primary key(MobileId,StaffId))
+create table ClassDetails(Class int foreign key references Class(class),Section varchar(2),year varchar(4) not null,Primary key(Class,Section,year),Class_TeacherId int unique foreign key references StaffDetails(StaffId))
+create table StaffDetails(StaffId int not null primary key identity(1,1),Name varchar(25) not null ,Qualification varchar(25)not null,JoiningYear varchar(4),PreviousExperience varchar(2))
+create table Class(class int primary key CONSTRAINT chk_class CHECK (class <= 12))
+create table SubjectDetails(SubjectId int not null Primary key identity(1,1),Class int foreign key references Class(Class),SubjectName varchar(20)not null)
+create table SubAndStaffRelation(SubjectId int  foreign key references SubjectDetails(SubjectId),class int ,Section varchar(2),Year varchar(4),foreign key(Class,Section,year) references ClassDetails(Class,Section,year),StaffId int foreign key references StaffDetails(StaffId),primary key(Class,Section,subjectid))
+create table StudentMarks(rollNo int not null,Class int not null,Section varchar(2)not null,Year varchar(4) not null,SubjectId int  foreign key references SubjectDetails(SubjectId),TypeOfExam int foreign key references ExamType(ExamId),Name varchar(25) ,Mark float,foreign key(rollno,Class,Section,Year) references StudDetails(rollno,Class,Section,Year),primary key(rollno,Class,Section,Year,SubjectId,TypeOfExam))
+create table ExamType(ExamId int not null primary key identity(1,1),ExamType varchar(25) not null)
+
+select * from  StudDetails;
+select * from  _Address;
+select * from  ClassDetails;
+select * from  StaffDetails;
+insert into class values(2);
+insert into class values(3);
+insert into class values(4);
+insert into class values(5);
+insert into class values(6);
+insert into class values(7);
+insert into class values(8);
+insert into class values(9);
+insert into class values(10);
+insert into class values(11);
+insert into class values(12);
+
+select * from  Class;
+select * from  SubjectDetails;
+select * from  SubAndStaffRelation;
+select * from  StudentMarks;
+select * from  ExamType;

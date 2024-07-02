@@ -9,7 +9,37 @@ namespace StudentApp
   public  class Repositories
     {
     public static string path=".\\SQLEXPRESS;Initial Catalog=test_school;Integrated Security=True";
-        public static void InsertStudDetails(StudDetails student)
+    public static int GetStudId(StudDetails student)
+    {
+        int id = -1;
+        int Class = student.Class;
+        string Section = student.Section;
+        string Year = student.Year;
+        string Name = student.Name;
+        string DateOfBirth = student.DateOfBirth;
+        string Blood_Group = student.Blood_Group;
+        try
+        {
+            using (SqlConnection con = new SqlConnection(path))
+            {
+                SqlCommand cmd = new SqlCommand();
+                con.Open();
+                cmd.Connection = con;
+
+                cmd.CommandText = "select (Class,Section,Year,Name,DateOfBirth,Blood_Group) from StudDetails ";
+
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex)
+        {
+            //
+        }
+        return id;
+    }
+
+    public static void InsertStudDetails(StudDetails student)
         {
             int Class = student.Class;
             string Section = student.Section;
@@ -34,7 +64,7 @@ namespace StudentApp
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+               //
             }
         }
 

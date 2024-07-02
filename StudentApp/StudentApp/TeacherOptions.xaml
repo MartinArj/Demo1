@@ -7,8 +7,6 @@
       d:DesignHeight="500" d:DesignWidth="700"
       ShowsNavigationUI="False"
 	Title="TeacherOptions">
-    
-
     <Grid>
         
         <Grid.ColumnDefinitions>
@@ -20,8 +18,6 @@
                 <ListView.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
-                        
-                        
                     </Style>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Background" Value="Transparent"/>
@@ -37,7 +33,6 @@
                                         <Trigger Property="IsSelected" Value="True">
                                             <Setter TargetName="Border" Property="Background" Value="lightblue"/>
                                             <Setter TargetName="Border" Property="BorderBrush" Value="#dbd7ca"/>
-
                                         </Trigger>
 
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -64,17 +59,35 @@
             </ListView>
             
         </StackPanel>
+       
+            
         <StackPanel Grid.Column="1">
-            <Border Name="Exam_type_combobox" Height="100" BorderThickness="1.5" BorderBrush="Transparent" IsEnabled="False">
-                <ComboBox Height="30" Width="300" x:Name="ExamType" ItemsSource="{Binding ExamTypeList}" HorizontalAlignment="Center" VerticalAlignment="Top"  SelectionChanged="ExamType_SelectionChanged_1"/>
+            
+            <Border Name="Exam_type_combobox" Height="100" BorderThickness="1.5" BorderBrush="Transparent"  IsEnabled="False" Margin="10">
+                <ComboBox Height="30" Width="300" x:Name="ExamType" ItemsSource="{Binding ExamTypeList}" HorizontalAlignment="Center" VerticalAlignment="Center"  SelectionChanged="ExamType_SelectionChanged_1"/>
                     
                 
             </Border>
-            <Border x:Name="mark_enty_section" BorderThickness="1.5" BorderBrush="Transparent" Height="330" IsEnabled="False" Margin="0 0 10 20">
-                <DataGrid AlternatingRowBackground="AliceBlue" AutoGenerateColumns="False" x:Name="datagrid">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="150" Header="     id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Width="200" Header="     Name" Binding="{Binding Name}"/>
+            <Border x:Name="mark_enty_section" BorderThickness="1.5" BorderBrush="Transparent" Height="330"  IsEnabled="False" Margin="0 0 10 20" >
+                <DataGrid AlternatingRowBackground="AliceBlue" AutoGenerateColumns="False" x:Name="datagrid" >
+               
+                   
+                        <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="150" Header="     id" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}" Background="Transparent"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Width="150" Header="     id" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Background="Transparent"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Width="*" Header="mark">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -86,8 +99,13 @@
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
                             <Setter Property="Height" Value="30"/>
-                 
+                             
                         </Style>
                         
                     </DataGrid.RowStyle>
