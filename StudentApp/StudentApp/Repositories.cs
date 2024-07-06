@@ -8,7 +8,7 @@ namespace StudentApp
 {
   public  class Repositories
     {
-    public static string path=".\\SQLEXPRESS;Initial Catalog=test_school;Integrated Security=True";
+      public static string path = @"Server=.\SQLEXPRESS;Database=temp_school;Integrated Security=True";
     public static int GetStudId(StudDetails student)
     {
         int id = -1;
@@ -18,23 +18,36 @@ namespace StudentApp
         string Name = student.Name;
         string DateOfBirth = student.DateOfBirth;
         string Blood_Group = student.Blood_Group;
-        try
+        using (SqlConnection con = new SqlConnection(path))
         {
-            using (SqlConnection con = new SqlConnection(path))
+            con.Open();
+
+            using (SqlCommand cmd = new SqlCommand())
             {
-                SqlCommand cmd = new SqlCommand();
-                con.Open();
                 cmd.Connection = con;
+                cmd.CommandText = "SELECT studId FROM StudDetails WHERE Class = @Class AND Section = @Section AND Year = @Year AND Name = @Name AND DateOfBirth = @DateOfBirth AND Blood_Group = @Blood_Group";
 
-                cmd.CommandText = "select (Class,Section,Year,Name,DateOfBirth,Blood_Group) from StudDetails ";
+                cmd.Parameters.AddWithValue("@Class", Class);
+                cmd.Parameters.AddWithValue("@Section", Section);
+                cmd.Parameters.AddWithValue("@Year", Year);
+                cmd.Parameters.AddWithValue("@Name", Name);
+                cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
+                cmd.Parameters.AddWithValue("@Blood_Group", Blood_Group);
 
+                // ExecuteScalar returns the first column of the first row in the result set
+                object result = cmd.ExecuteScalar();
 
-                cmd.ExecuteNonQuery();
+                if (result != null)
+                {
+                    id = Convert.ToInt32(result);
+                    // Use the id as needed
+                }
+                else
+                {
+                    // Handle the case where no matching record is found
+                }
             }
-        }
-        catch (Exception ex)
-        {
-            //
+            
         }
         return id;
     }
@@ -56,7 +69,7 @@ namespace StudentApp
                     con.Open();
                     cmd.Connection = con;
 
-                    cmd.CommandText = "insert into StudDetails(Class,Section,Year,Name,DateOfBirth,Blood_Group,AddressId) values('" + Class + "','" + Section + "','" + Year + "','" + Name + "','" + DateOfBirth + "','" + Blood_Group + "','" + Name + "')";
+                    cmd.CommandText = "insert into StudDetails(Class,Section,Year,Name,DateOfBirth,Blood_Group) values('" + Class + "','" + Section + "','" + Year + "','" + Name + "','" + DateOfBirth + "','" + Blood_Group + "')";
 
                    
                     cmd.ExecuteNonQuery();
@@ -71,9 +84,7 @@ namespace StudentApp
         public static void Insert_Address(Address add)
         {
             int StudId = add.StudId;
-            int Class = add.Class;
-            string Section = add.Section;
-            string Year = add.Year;
+          
             string DoorNo = add.DoorNo;
             string Street = add.Street;
             string Village = add.Village;
@@ -89,7 +100,7 @@ namespace StudentApp
                     SqlCommand cmd = new SqlCommand();
                     con.Open();
                     cmd.Connection = con;
-                    cmd.CommandText = "insert into _Address values('" + DoorNo + "','" + Street + "','" + Village + "','" + City + "','" + State + "','" + Pin_Code + "','" + Mobile_Number + "','" + Mail_Id + "')";
+                    cmd.CommandText = "insert into _Address values("+StudId+",'" + DoorNo + "','" + Street + "','" + Village + "','" + City + "','" + State + "','" + Pin_Code + "','" + Mobile_Number + "','" + Mail_Id + "')";
                     cmd.ExecuteNonQuery();
                 }
             }

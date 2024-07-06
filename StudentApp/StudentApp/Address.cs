@@ -14,27 +14,7 @@ namespace StudentApp
             get { return _StudId; }
             set { _StudId = value; }
         }
-        private int _Class;
-
-        public int Class
-        {
-            get { return _Class; }
-            set { _Class = value; }
-        }
-        private string _Section;
-
-        public string Section
-        {
-            get { return _Section; }
-            set { _Section = value; }
-        }
-        private string _Year;
-
-        public string Year
-        {
-            get { return _Year; }
-            set { _Year = value; }
-        }
+       
         private string _DoorNo;
 
         public string DoorNo
@@ -91,12 +71,10 @@ namespace StudentApp
             get { return _Mail_Id; }
             set { _Mail_Id = value; }
         }
-        public Address(int StudId, int Class, string Section, string Year, string DoorNo, string Street, string Village, string City, string State, string Pin_Code, string Mobile_Number, string Mail_Id)
+        public Address(int StudId, string DoorNo, string Street, string Village, string City, string State, string Pin_Code, string Mobile_Number, string Mail_Id)
         {
             this._StudId = StudId;
-            this._Class = Class;
-            this._Section = Section;
-            this._Year = Year;
+          
             this._DoorNo = DoorNo;
             this._Street = Street;
             this._Village = Village;
