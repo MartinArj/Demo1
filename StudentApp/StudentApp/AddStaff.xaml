@@ -16,7 +16,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="5,10,0,10">
                             <TextBlock Text="Name:" FontSize="20" Height="30" Width="190"/>
-                            <TextBox Height="30" Width="250" x:Name="name"/>
+                            <TextBox Height="30" Width="250" x:Name="sname"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
                             <TextBlock Text="Date of birth:" FontSize="20" Height="30" Width="190"/>
@@ -28,11 +28,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
                             <TextBlock Text="JoiningYear:" FontSize="20" Height="30" Width="190"/>
-                            <TextBox Height="30" Width="250" x:Name="joiningyear"/>
+                            <TextBox Height="30" Width="250" x:Name="joiningYear"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
                             <TextBlock Text="PreviousExperience:" FontSize="20" Height="30" Width="190"/>
-                            <TextBox Height="30" Width="250" />
+                            <TextBox Height="30" Width="250" x:Name="previousExperence" />
                         </StackPanel>
                         <StackPanel>
                             <Button Height="30" Width="70" Content="Next" x:Name="address" Click="address_Click_1" HorizontalAlignment="Right"/>

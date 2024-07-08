@@ -77,14 +77,13 @@ namespace StudentApp
             }
             catch (Exception ex)
             {
-               //
+              
             }
         }
 
         public static void Insert_Address(Address add)
         {
             int StudId = add.StudId;
-          
             string DoorNo = add.DoorNo;
             string Street = add.Street;
             string Village = add.Village;
@@ -223,7 +222,7 @@ namespace StudentApp
 
         public static void InsertExamType(ExamType et)
         {
-            string ExamType = et.ExamType1;
+            string ExamType = et.Exam_Type;
             try
             {
                 using (SqlConnection con = new SqlConnection(path))
