@@ -133,6 +133,7 @@ namespace StudentApp
 
         public static void InsertStaffDetails(staffDetails staff)
         {
+            string dob = staff.Dob;
             string Name = staff.Name;
             string Qualification = staff.Qualification;
             string JoiningYear = staff.JoiningYear;
@@ -145,7 +146,7 @@ namespace StudentApp
                     con.Open();
                     cmd.Connection = con;
 
-                    cmd.CommandText = "insert into StaffDetails values('" + Name + "','" +Name + "','" + Qualification + "','" + JoiningYear + "','" + PreviousExperience + "')";
+                    cmd.CommandText = "insert into StaffDetails values('" + Name + "','" +dob+ "','" + Qualification + "','" + JoiningYear + "','" + PreviousExperience + "')";
 
                     cmd.ExecuteNonQuery();
                 }
