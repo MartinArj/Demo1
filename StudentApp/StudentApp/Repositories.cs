@@ -130,6 +130,59 @@ namespace StudentApp
                 Console.WriteLine(ex);
             }
         }
+        public static int GetStaffId(staffDetails details)
+        {
+            int id = -1;
+            using (SqlConnection con = new SqlConnection(path))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "SELECT staffid FROM StaffDetails WHERE Name = @Name AND Dob = @Dob AND Qualification = @Qualification AND JoiningYear = @JoiningYear AND PreviousExperience = @PreviousExperience";
+
+                    cmd.Parameters.AddWithValue("@Name", details.Name);
+                    cmd.Parameters.AddWithValue("@Dob", details.Dob);
+                    cmd.Parameters.AddWithValue("@Qualification", details.Qualification);
+                    cmd.Parameters.AddWithValue("@JoiningYear", details.JoiningYear);
+                    cmd.Parameters.AddWithValue("@PreviousExperience",details.PreviousExperience);
+                  
+
+                    // ExecuteScalar returns the first column of the first row in the result set
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        id = Convert.ToInt32(result);
+                        // Use the id as needed
+                    }
+                  
+                }
+
+            }
+            return id;
+        }
+        public static void InsertStaffAdress(StaffAddress ad)
+        {
+            int id = ad.StaffId;
+            string door = ad.DoorNo;
+            string street = ad.Street;
+            string village = ad.Village;
+            string city = ad.City;
+            string state = ad.State;
+            string pincode = ad.Pin_Code;
+            string mailid = ad.Mail_Id;
+            using (SqlConnection con = new SqlConnection(path))
+            {
+                SqlCommand cmd = new SqlCommand();
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "insert into StaffAddress values(" + id + ",'" + door + "','" + street + "','" + village + "','" + city + "','" + state + "','" + pincode + "','" + mailid + "',1)";
+                cmd.ExecuteNonQuery();
+            }
+        
+        }
 
         public static void InsertStaffDetails(staffDetails staff)
         {
@@ -155,6 +208,21 @@ namespace StudentApp
             {
                 Console.WriteLine(ex);
             }
+        }
+        public static void InsertStaffMobile(staffMobileNumber mob)
+        {
+            string Mobile = mob.Mobile_Number;
+            int id = mob.StaffId;
+            string type = mob.Type;
+            using (SqlConnection con = new SqlConnection(path))
+            {
+                SqlCommand cmd = new SqlCommand();
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "insert into StaffMobile_Number values("+id+",'" + Mobile+ "','"+type+"')";
+                cmd.ExecuteNonQuery();
+            }
+        
         }
 
         public static void InsertClass(int Class)

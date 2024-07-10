@@ -54,31 +54,31 @@
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
                             <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="Door No:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="door_no"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="Street:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="Street"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="Village:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="Village"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="City:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="City"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="State:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="State"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                                 <TextBlock Height="30" Width="190" Text="Pin Code:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="Pincode" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="10,10,0,10" >
                                 <TextBlock Height="30" Width="190" Text="Mail Id:" FontSize="20" />
-                                <TextBox Height="30" Width="200"/>
+                                <TextBox Height="30" Width="200" x:Name="Mailid" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10" >
@@ -98,8 +98,8 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
-                        <RadioButton Content="official" GroupName="number_type" FontSize="20"  Margin="10 10 10 10"/>
-                        <RadioButton Content="personal"  FontSize="20" GroupName="number_type"   Margin="50 10 10 10"/>
+                        <RadioButton Content="official" GroupName="number_type" FontSize="20"  Margin="10 10 10 10" Checked="RadioButton_Checked_1"/>
+                        <RadioButton Content="personal"  FontSize="20" GroupName="number_type"   Margin="50 10 10 10" Checked="RadioButton_Checked_1"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
                         <Button Height="30" Width="90" Content="privious" x:Name="privious_address" Click="privious_address_Click_1" Margin="0 0 10 0"/>

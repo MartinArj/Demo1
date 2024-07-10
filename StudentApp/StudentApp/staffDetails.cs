@@ -43,10 +43,10 @@ namespace StudentApp
             get { return _PreviousExperience; }
             set { _PreviousExperience = value; }
         }
-        public staffDetails(string Name, string Qualification, string JoiningYear, string PreviousExperience)
+        public staffDetails(string Name,string dob, string Qualification, string JoiningYear, string PreviousExperience)
         {
             this._Name = Name;
-
+            this._Dob = dob;
             this._Qualification = Qualification;
             this._JoiningYear = JoiningYear;
             this._PreviousExperience = PreviousExperience;

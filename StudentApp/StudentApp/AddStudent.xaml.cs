@@ -41,6 +41,8 @@ namespace StudentApp
             this.NavigationService.Navigate(new AddStudent());
            
         }
+
+        //secont
         public void insertaddress(StudDetails temp)
         { 
            int StudId=Repositories.GetStudId(temp);
@@ -56,6 +58,7 @@ namespace StudentApp
             Address ad = new Address(StudId,DoorNo,Street,Village,City,State,Pin_Code,Mobile_Number,Mail_Id);
             Repositories.Insert_Address(ad);
         }
+
         public void insertstudentDetail()
         {
             string StudentName = studName.Text;

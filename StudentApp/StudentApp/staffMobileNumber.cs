@@ -22,16 +22,17 @@ namespace StudentApp
             set { _Mobile_Number = value; }
         }
         private string _Type;
-
+      
         public string Type
         {
             get { return _Type; }
             set { _Type = value; }
         }
-        public staffMobileNumber(int SatffId, string Mobile_Number)
+        public staffMobileNumber(int SatffId, string Mobile_Number,string type)
         {
             this._StaffId = StaffId;
             this._Mobile_Number = Mobile_Number;
+            this._Type = type;
         }
     }
 }
