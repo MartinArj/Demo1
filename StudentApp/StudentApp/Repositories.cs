@@ -163,24 +163,33 @@ namespace StudentApp
             }
             return id;
         }
-        public static void InsertStaffAdress(StaffAddress ad)
+        public static void InsertStaffAdress(staffDetails staff)
         {
-            int id = ad.StaffId;
-            string door = ad.DoorNo;
-            string street = ad.Street;
-            string village = ad.Village;
-            string city = ad.City;
-            string state = ad.State;
-            string pincode = ad.Pin_Code;
-            string mailid = ad.Mail_Id;
-            using (SqlConnection con = new SqlConnection(path))
+            try
             {
-                SqlCommand cmd = new SqlCommand();
-                con.Open();
-                cmd.Connection = con;
-                cmd.CommandText = "insert into StaffAddress values(" + id + ",'" + door + "','" + street + "','" + village + "','" + city + "','" + state + "','" + pincode + "','" + mailid + "',1)";
-                cmd.ExecuteNonQuery();
+                using (SqlConnection con = new SqlConnection(path))
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    con.Open();
+                    cmd.Connection = con;
+                    foreach (var ad in staff.AddressList)
+                    {
+                        int id = staff.Id;
+                        string door = ad.DoorNo;
+                        string street = ad.Street;
+                        string village = ad.Village;
+                        string city = ad.City;
+                        string state = ad.State;
+                        string pincode = ad.Pin_Code;
+                        string mailid = ad.Mail_Id;
+
+                        cmd.CommandText = "insert into StaffAddress values(" + id + ",'" + door + "','" + street + "','" + village + "','" + city + "','" + state + "','" + pincode + "','" + mailid + "',"+ad.Type+")";
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
+            catch(Exception ex) { }
+           
         
         }
 
@@ -204,23 +213,30 @@ namespace StudentApp
                     cmd.ExecuteNonQuery();
                 }
             }
+           
+           
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
         }
-        public static void InsertStaffMobile(staffMobileNumber mob)
+        public static void InsertStaffMobile(staffDetails staff)
         {
-            string Mobile = mob.Mobile_Number;
-            int id = mob.StaffId;
-            string type = mob.Type;
+          
             using (SqlConnection con = new SqlConnection(path))
             {
                 SqlCommand cmd = new SqlCommand();
                 con.Open();
                 cmd.Connection = con;
+                foreach (var item in staff.mobilenumbers)
+                {
+                    string Mobile = item.Mobile_Number;
+                    int id = staff.Id;
+                    string type = item.Type;
+               
                 cmd.CommandText = "insert into StaffMobile_Number values("+id+",'" + Mobile+ "','"+type+"')";
                 cmd.ExecuteNonQuery();
+                }
             }
         
         }

@@ -10,7 +10,7 @@
 	Title="AddStaff">
 
     <Grid>
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="500" CornerRadius="20,30,40,20" BorderThickness="1,2,3,1" BorderBrush="Pink" >
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="450" Width="500" CornerRadius="20,30,40,20" BorderThickness="1,2,3,1" BorderBrush="Pink" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel x:Name="AddStaffDetail_pannel" Visibility="Visible" >
                     <StackPanel>
@@ -80,9 +80,17 @@
                                 <TextBlock Height="30" Width="190" Text="Mail Id:" FontSize="20" />
                                 <TextBox Height="30" Width="200" x:Name="Mailid" />
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
+                                <RadioButton Content="Permanent" GroupName="Address_type" FontSize="20"  Margin="10 10 10 10" Checked="RadioButton_Checked_2"/>
+                                <RadioButton Content="Temprory"  FontSize="20" GroupName="Address_type"   Margin="50 10 10 10" Checked="RadioButton_Checked_2"/>
+                            </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10" >
+                            
                             <Button Height="30" Width="70" Content="previous" x:Name="staff_detail" Click="staff_detail_Click_1" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                            <Button Height="30" Width="70" Content="Add Address" x:Name="Add_Address" Click="Add_Address_Click_1"/>
+                                
+                           
                             <Button Width="70" Content="Next" x:Name="Phone_number" Click="Phone_number_Click_1" Height="30" VerticalAlignment="Bottom"/>
                         </StackPanel>
                     </Grid>

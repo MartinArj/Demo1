@@ -26,7 +26,7 @@ namespace StudentApp
         public string Type
         {
             get { return _Type; }
-            set { _Type = value; }
+            set { _Type = value; } 
         }
         public staffMobileNumber(int SatffId, string Mobile_Number,string type)
         {

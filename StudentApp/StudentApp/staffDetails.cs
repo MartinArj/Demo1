@@ -7,6 +7,17 @@ namespace StudentApp
 {
    public class staffDetails
     {
+       public List<StaffAddress> AddressList = new List<StaffAddress>();
+       public List<staffMobileNumber> mobilenumbers = new List<staffMobileNumber>();
+   
+       private int _Id;
+
+       public int Id
+       {
+           get { return _Id; }
+           set { _Id = value; }
+       }
+
         private string _Name;
 
         public string Name
@@ -51,5 +62,6 @@ namespace StudentApp
             this._JoiningYear = JoiningYear;
             this._PreviousExperience = PreviousExperience;
         }
+
     }
 }

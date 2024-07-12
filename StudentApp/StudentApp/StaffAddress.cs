@@ -63,7 +63,15 @@ namespace StudentApp
             get { return _Mail_Id; }
             set { _Mail_Id = value; }
         }
-        public StaffAddress(int StaffId, string DoorNo, string Street, string Village, string City, string State, string Pin_Code, string Mail_Id)
+        private Byte type;
+
+        public Byte Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        public StaffAddress(int StaffId, string DoorNo, string Street, string Village, string City, string State, string Pin_Code, string Mail_Id,Byte type)
         {
             this._StaffId = StaffId;
             this._DoorNo = DoorNo;
@@ -73,6 +81,8 @@ namespace StudentApp
             this._State = State;
             this._Pin_Code = Pin_Code;
             this._Mail_Id = Mail_Id;
+            this.type = type;
+
         }
 
     }
