@@ -70,6 +70,7 @@ namespace StudentApp
             get { return type; }
             set { type = value; }
         }
+        public StaffAddress() { }
 
         public StaffAddress(int StaffId, string DoorNo, string Street, string Village, string City, string State, string Pin_Code, string Mail_Id,Byte type)
         {

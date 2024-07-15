@@ -129,6 +129,17 @@ namespace StudentApp
              State.Clear();
           Pincode.Clear();
           Mailid.Clear();
+        
+           check.Visibility = Visibility.Visible;
+           if (0== staff.AddressList.IndexOf(staffad))
+           {
+               right.IsEnabled = false;
+           }
+           else
+           {
+               right.IsEnabled = true;
+           }
+
         }
         byte AdType;
         private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
@@ -143,6 +154,64 @@ namespace StudentApp
             {
                 AdType = 0;
             }
+        }
+
+        private void left_Click_1(object sender, RoutedEventArgs e)
+        {
+            int intex = staff.AddressList.IndexOf(staffad);
+            if (intex != 0)
+            {
+                staffad = staff.AddressList[intex - 1];
+                SetAddress(staffad);
+            }
+            else
+            {
+                staffad = staff.AddressList[intex];
+                SetAddress(staffad);
+                right.IsEnabled = true;
+                left.IsEnabled = false;
+            }
+        }
+
+        private void right_Click_1(object sender, RoutedEventArgs e)
+        {
+            int intex = staff.AddressList.IndexOf(staffad);
+            if (intex != staff.AddressList.Count - 2 && 1 < staff.AddressList.Count)
+            {
+                staffad = staff.AddressList[intex + 1];
+                SetAddress(staffad);
+            }
+            else
+            {
+                if (staff.AddressList.Count == 1) { SetAddress(new StaffAddress()); }
+                SetAddress(staffad);
+                left.IsEnabled = true;
+                right.IsEnabled = false;
+
+            }
+
+        }
+
+        private void left1_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void right2_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void SetAddress(StaffAddress ad)
+        {
+
+            door_no.Text = ad.DoorNo;
+            Street.Text = ad.Street;
+            Village.Text = ad.Village;
+            City.Text = ad.City;
+            State.Text = ad.State;
+            Pincode.Text = ad.Pin_Code;
+            Mailid.Text = ad.Mail_Id;
+
         }
     }
 }

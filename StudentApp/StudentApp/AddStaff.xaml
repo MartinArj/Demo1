@@ -6,11 +6,11 @@
       mc:Ignorable="d" 
     Background="White"
       ShowsNavigationUI="False"
-      d:DesignHeight="500" d:DesignWidth="700"
+      d:DesignHeight="600" d:DesignWidth="700"
 	Title="AddStaff">
 
     <Grid>
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="450" Width="500" CornerRadius="20,30,40,20" BorderThickness="1,2,3,1" BorderBrush="Pink" >
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="550" Width="500" CornerRadius="20,30,40,20" BorderThickness="1,2,3,1" BorderBrush="Pink" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel x:Name="AddStaffDetail_pannel" Visibility="Visible" >
                     <StackPanel>
@@ -84,11 +84,16 @@
                                 <RadioButton Content="Permanent" GroupName="Address_type" FontSize="20"  Margin="10 10 10 10" Checked="RadioButton_Checked_2"/>
                                 <RadioButton Content="Temprory"  FontSize="20" GroupName="Address_type"   Margin="50 10 10 10" Checked="RadioButton_Checked_2"/>
                             </StackPanel>
+                            <StackPanel Orientation="Horizontal" x:Name="check" HorizontalAlignment="Right" Margin="0" Visibility="Hidden">
+                                <Button Height="20" Width="20" Content="L" x:Name="left" Margin="0 0 1.5 0" Click="left_Click_1" />
+                                <Button Height="20" Width="20" Content="R" x:Name="right" Click="right_Click_1" />
+                            </StackPanel>
                         </StackPanel>
+                        
                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10" >
                             
                             <Button Height="30" Width="70" Content="previous" x:Name="staff_detail" Click="staff_detail_Click_1" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                            <Button Height="30" Width="70" Content="Add Address" x:Name="Add_Address" Click="Add_Address_Click_1"/>
+                            <Button Height="30" Width="70" Content="Add Address" x:Name="Add_Address" Click="Add_Address_Click_1" Margin="0 0 10 0"/>
                                 
                            
                             <Button Width="70" Content="Next" x:Name="Phone_number" Click="Phone_number_Click_1" Height="30" VerticalAlignment="Bottom"/>
@@ -108,7 +113,12 @@
                     <StackPanel Orientation="Horizontal" Margin="10 10 10 10">
                         <RadioButton Content="official" GroupName="number_type" FontSize="20"  Margin="10 10 10 10" Checked="RadioButton_Checked_1"/>
                         <RadioButton Content="personal"  FontSize="20" GroupName="number_type"   Margin="50 10 10 10" Checked="RadioButton_Checked_1"/>
+                    </StackPanel >
+                    <StackPanel x:Name="check1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0" Visibility="Collapsed">
+                        <Button Height="20" Width="20" Content="L" x:Name="left1" Margin="0 0 1.5 0" Click="left1_Click_1" />
+                        <Button Height="20" Width="20" Content="R" x:Name="right2" Click="right2_Click_1" />
                     </StackPanel>
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
                         <Button Height="30" Width="90" Content="privious" x:Name="privious_address" Click="privious_address_Click_1" Margin="0 0 10 0"/>
                         <Button Height="30" Width="90" Content="Another One" x:Name="NewMobileNumber" Click="NewMobileNumber_Click_1"  Margin="0 0 10 0"/>
