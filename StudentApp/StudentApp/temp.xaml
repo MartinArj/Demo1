@@ -8,32 +8,8 @@
 	Title="temp">
 
     <Grid>
-        <ListView>
-            <ListView.Resources>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListViewItem">
-                                <Border Name="Border" Background="Transparent" BorderBrush="Transparent" BorderThickness="1">
-                                    <ContentPresenter />
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                        <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.Resources>
-            <ListViewItem>Item 1</ListViewItem>
-            <ListViewItem>Item 2</ListViewItem>
-            <ListViewItem>Item 3</ListViewItem>
-        </ListView>
+        <Border>
+            <TextBlock Text="WECOME ADMIN" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Foreground="RED"/>
+        </Border>
     </Grid>
 </Page>

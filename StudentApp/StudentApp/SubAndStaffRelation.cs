@@ -42,14 +42,22 @@ namespace StudentApp
             get { return _StaffId; }
             set { _StaffId = value; }
         }
+        private bool _Isclassteacher;
 
-        public SubAndStaffRelation(int SubjectId, int Class, string Section, string Year, int StaffId)
+        public bool Isclassteacher
+        {
+            get { return _Isclassteacher; }
+            set { _Isclassteacher = value; }
+        }
+        public SubAndStaffRelation(int SubjectId, int Class, string Section, string Year, int StaffId,bool isclassteacher)
         {
             this._SubjectId = SubjectId;
             this._Class = Class;
             this._Section = Section;
             this._Year = Year;
             this._StaffId = StaffId;
+            this._Isclassteacher = isclassteacher;
+            
         }
     }
 }

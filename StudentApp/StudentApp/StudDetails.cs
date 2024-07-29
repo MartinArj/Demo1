@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StudentApp
 {
-   public class StudDetails
+   public class StudDetails 
     {
         private int _Class;
 
@@ -50,7 +50,13 @@ namespace StudentApp
             set { _Blood_Group = value; }
         }
 
+        private int studid;
 
+        public int Studid
+        {
+            get { return studid; }
+            set { studid = value; }
+        }
 
         public StudDetails(int Class, string Section, string Year, string Name, string DateOfBirth, string Blood_Group)
         {
@@ -60,8 +66,16 @@ namespace StudentApp
             this._Name = Name;
             this._DateOfBirth = DateOfBirth;
             this._Blood_Group = Blood_Group;
-
-
+        }
+        public StudDetails(int studid,int Class, string Section, string Year, string Name, string DateOfBirth, string Blood_Group)
+        {
+            this.studid = studid;
+            this._Class = Class;
+            this._Section = Section;
+            this._Year = Year;
+            this._Name = Name;
+            this._DateOfBirth = DateOfBirth;
+            this._Blood_Group = Blood_Group;
         }
     }
 }

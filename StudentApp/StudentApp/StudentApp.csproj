@@ -53,17 +53,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddExamType.xaml.cs">
+      <DependentUpon>AddExamType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddSection.xaml.cs">
+      <DependentUpon>AddSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddStudent.xaml.cs">
       <DependentUpon>AddStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddSubject.xaml.cs">
       <DependentUpon>AddSubject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Alllogin.xaml.cs">
       <DependentUpon>Alllogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MarkEntry.xaml.cs">
-      <DependentUpon>MarkEntry.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories.cs" />
     <Compile Include="StaffAddress.cs" />
@@ -73,12 +79,23 @@
     <Compile Include="StudentsMarks.cs" />
     <Compile Include="SubAndStaffRelation.cs" />
     <Compile Include="SubjectDetails.cs" />
+    <Compile Include="TeacherAllocation.xaml.cs">
+      <DependentUpon>TeacherAllocation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TeacherOptions.xaml.cs">
       <DependentUpon>TeacherOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="temp.xaml.cs">
       <DependentUpon>temp.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddExamType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddStaff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -88,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,7 +134,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MarkEntry.xaml">
+    <Page Include="TeacherAllocation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

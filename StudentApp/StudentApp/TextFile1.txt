@@ -1,33 +1,162 @@
-﻿create table StudDetails(StudId int not null identity(1,1) primary key,Class int not null,Section varchar(2) not null,Year varchar(4)not null,Name varchar(25)not null,DateOfBirth varchar(10)not null,Blood_Group varchar(3),isactive bit default 1 )
-create table _Address(studid int foreign key references studdetails(studid) primary key,DoorNo Varchar(5) not null,Street varchar(25) not null,Village varchar(25) not null,City varchar(20)not null,State varchar(20) not null,Pin_Code varchar(6) not null,Mobile_Number varchar(13) not null,Mail_Id varchar(50) not null) 
-create table ClassDetails(Class int,Section varchar(2),Primary key(Class,Section),Isactive bit default 1 )
-create table StaffMobile_Number(StaffId int not null foreign key references StaffDetails(StaffId),Mobile_Number varchar(13),mtype varchar(10) not null,primary key(StaffId,Mobile_Number))
-create table StaffAddress(StaffId int not null foreign key references StaffDetails(StaffId),DoorNo Varchar(5) not null,Street varchar(25) not null,Village varchar(25) not null,City varchar(20)not null,State varchar(20) not null,Pin_Code varchar(6) not null,Mail_Id varchar(50) not null,AddressType bit default 1,primary key(StaffId,AddressType)) 
+﻿-- Create Class table
+CREATE TABLE Class (
+    Class INT PRIMARY KEY CONSTRAINT chk_class CHECK (Class <= 12)
+);
+INSERT INTO Class (Class)
+VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
-create table StaffDetails(StaffId int not null primary key identity(1,1),Name varchar(25) not null,dob varchar(10),Qualification varchar(25)not null,JoiningYear varchar(4),PreviousExperience varchar(2))
-create table Class(class int primary key CONSTRAINT chk_class CHECK (class <= 12))
-create table SubjectDetails(SubjectId int not null Primary key identity(1,1),Class int foreign key references Class(Class),SubjectName varchar(20)not null)
-create table SubAndStaffRelation(SubjectId int  foreign key references SubjectDetails(SubjectId),class int ,Section varchar(2),Year varchar(4),foreign key(Class,Section) references ClassDetails(Class,Section),StaffId int foreign key references StaffDetails(StaffId),isclassteacher bit,primary key(staffid,class,section,year,subjectid))
-create table StudentMarks(StudId int not null foreign key references studdetails(studid),Class int not null,Section varchar(2)not null,Year varchar(4) not null,SubjectId int  foreign key references SubjectDetails(SubjectId),examid int foreign key references ExamType(ExamId),Name varchar(25) ,Mark float,primary key(StudId,Class,Section,Year,SubjectId,Examid))
-create table ExamType(ExamId int not null identity(1,1) unique,class int foreign key references Class(class),ExamType varchar(25) not null,maxmark float,primary key(class,examtype,maxmark))
+-- Create ExamType table
+CREATE TABLE ExamType (
+    ExamId INT NOT NULL IDENTITY(1,1) UNIQUE,
+    Class INT FOREIGN KEY REFERENCES Class(Class),
+    ExamType VARCHAR(25) NOT NULL,
+    MaxMark FLOAT,
+    PRIMARY KEY (Class, ExamType, MaxMark)
+);
 
-create table classStud(year varchar(4) not null,studid int not null foreign key references studdetails(studid),primary key(year,studid),class int not null,section varchar(2))
+-- Create StudDetails table
+CREATE TABLE StudDetails (
+    StudId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Class INT NOT NULL,
+    Section VARCHAR(2) NOT NULL,
+    Year VARCHAR(4) NOT NULL,
+    Name VARCHAR(25) NOT NULL,
+    DateOfBirth VARCHAR(10) NOT NULL,
+    Blood_Group VARCHAR(3),
+    IsActive BIT DEFAULT 1
+);
 
-select * from studdetails
-select * from _address
+-- Create _Address table
+CREATE TABLE _Address (
+    StudId INT FOREIGN KEY REFERENCES StudDetails(StudId) PRIMARY KEY,
+    DoorNo VARCHAR(5) NOT NULL,
+    Street VARCHAR(25) NOT NULL,
+    Village VARCHAR(25) NOT NULL,
+    City VARCHAR(20) NOT NULL,
+    State VARCHAR(20) NOT NULL,
+    Pin_Code VARCHAR(6) NOT NULL,
+    Mobile_Number VARCHAR(13) NOT NULL,
+    Mail_Id VARCHAR(50) NOT NULL
+);
+
+-- Create ClassDetails table
+CREATE TABLE ClassDetails (
+    Class INT,
+    Section VARCHAR(2),
+    PRIMARY KEY (Class, Section),
+    IsActive BIT DEFAULT 1
+);
+
+-- Create StaffDetails table
+CREATE TABLE StaffDetails (
+    StaffId INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(25) NOT NULL,
+    Dob VARCHAR(10),
+    Qualification VARCHAR(25) NOT NULL,
+    JoiningYear VARCHAR(10),
+    PreviousExperience VARCHAR(2),
+    Gender VARCHAR(10) not null,
+    SubjectsTaught VARCHAR(50) not null ,
+    UptoClass INT ,
+    IsActive BIT DEFAULT 1
+);
+
+-- Create StaffMobile_Number table
+CREATE TABLE StaffMobile_Number (
+    StaffId INT NOT NULL FOREIGN KEY REFERENCES StaffDetails(StaffId),
+    Mobile_Number VARCHAR(13),
+    MType VARCHAR(10) NOT NULL,
+    PRIMARY KEY (StaffId, Mobile_Number)
+);
+
+-- Create StaffAddress table
+CREATE TABLE StaffAddress (
+    StaffId INT NOT NULL FOREIGN KEY REFERENCES StaffDetails(StaffId),
+    DoorNo VARCHAR(5) NOT NULL,
+    Street VARCHAR(25) NOT NULL,
+    Village VARCHAR(25) NOT NULL,
+    City VARCHAR(20) NOT NULL,
+    State VARCHAR(20) NOT NULL,
+    Pin_Code VARCHAR(6) NOT NULL,
+    Mail_Id VARCHAR(50) NOT NULL,
+    AddressType BIT DEFAULT 1,
+    PRIMARY KEY (StaffId, AddressType)
+);
+
+-- Create SubjectDetails table with IsActive column
+CREATE TABLE SubjectDetails (
+    SubjectId INT NOT NULL IDENTITY(1,1) UNIQUE,
+    Class INT FOREIGN KEY REFERENCES Class(Class),
+    SubjectName VARCHAR(20) NOT NULL,
+    IsActive BIT DEFAULT 1,
+    PRIMARY KEY (Class, SubjectName)
+);
+
+CREATE TABLE SubAndStaffRelation (
+    SubjectId int FOREIGN KEY REFERENCES SubjectDetails(SubjectId),
+    Class int,
+    Section varchar(2),
+    Year varchar(4),
+    StaffId int FOREIGN KEY REFERENCES StaffDetails(StaffId),
+    IsClassTeacher bit,
+    PRIMARY KEY (StaffId, Class, Section, Year, SubjectId),
+    FOREIGN KEY (Class, Section) REFERENCES ClassDetails(Class, Section)
+);
+-- Create classStud table
+CREATE TABLE classStud (
+    Year VARCHAR(4) NOT NULL,
+    StudId INT NOT NULL FOREIGN KEY REFERENCES StudDetails(StudId),
+    Class INT NOT NULL,
+    Section VARCHAR(2),
+    PRIMARY KEY (Year, StudId)
+);
+CREATE TABLE StudentMarks (
+    StudId INT NOT NULL,
+    Class INT NOT NULL,
+    Section VARCHAR(2) NOT NULL,
+    Year VARCHAR(4) NOT NULL,
+    subjectname varchar(25),
+      examtype varchar(25),
+    Name VARCHAR(25),
+    Mark FLOAT,
+    PRIMARY KEY (StudId, Class, Section, Year, subjectname, examtype),
+    FOREIGN KEY (StudId) REFERENCES studdetails(studid),
+    
+);
+-- Select all records from Class table
+SELECT * FROM Class;
+
+-- Select all records from ExamType table
+SELECT * FROM ExamType;
+
+-- Select all records from StudDetails table
+SELECT * FROM StudDetails;
+
+-- Select all records from _Address table
+SELECT * FROM _Address;
+
+-- Select all records from ClassDetails table
+SELECT * FROM ClassDetails;
+
+-- Select all records from StaffDetails table
+SELECT * FROM StaffDetails;
+
+-- Select all records from StaffMobile_Number table
+SELECT * FROM StaffMobile_Number;
+
+-- Select all records from StaffAddress table
+SELECT * FROM StaffAddress;
+
+-- Select all records from SubjectDetails table
+SELECT * FROM SubjectDetails;
+
+-- Select all records from SubAndStaffRelation table
+SELECT * FROM SubAndStaffRelation;
+
+-- Select all records from classStud table
+SELECT * FROM classStud;
+
+-- Select all records from StudentMarks table
+SELECT * FROM StudentMarks;
 
 
-drop table   StudentMarks
-insert into class values(1)
-insert into class values(2);
-insert into class values(3)
-insert into class values(4);
-insert into class values(5)
-insert into class values(6);
-insert into class values(7)
-insert into class values(8);
-insert into class values(9)
-insert into class values(10);
-insert into class values(11)
-insert into class values(12)
-insert into class values(1);

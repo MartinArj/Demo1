@@ -22,6 +22,7 @@ namespace StudentApp
         public MainWindow()
         {
             InitializeComponent();
+            Mainfram.Navigate(new Alllogin());
         }
     }
 }

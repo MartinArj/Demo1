@@ -23,15 +23,17 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Student Class" FontSize="18" Margin="20,15,0,0" Height="30" Width="150"/>
-                        <ComboBox Width="300" Height="30" x:Name="studCls">
+                        <ComboBox Width="300" Height="30" x:Name="studCls" SelectionChanged="studCls_SelectionChanged_1">
                           
                         </ComboBox>
                     </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Section" FontSize="18" Margin="20,15,0,0" Height="30" Width="150"/>
-                    <TextBox Width="300" Height="30" x:Name="studSec" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Section" FontSize="18" Margin="20,15,0,0" Height="30" Width="150"/>
+                        <ComboBox Width="300" Height="30" x:Name="Sectionbox">
+
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Joining Year" FontSize="18" Margin="20,15,0,0" Height="30" Width="150"/>
                     <TextBox Width="300" Height="30" x:Name="studYear"/>
                 </StackPanel>

@@ -21,20 +21,37 @@ namespace StudentApp
             get { return _Class; }
             set { _Class = value; }
         }
-        private int _Maxmark;
+        private float _Maxmark;
 
-        public int Maxmark
+        public float Maxmark
         {
             get { return _Maxmark; }
             set { _Maxmark = value; }
         }
+        private int _examid;
 
-
-        public ExamType(string ExamType,int Class,int Maxmark)
+        public int Examid
+        {
+            get { return _examid; }
+            set { _examid = value; }
+        }
+       
+        public ExamType()
+        { 
+        }
+        public ExamType(int Examid,string ExamType, int Class, float Maxmark)
+        {
+            this._examid = Examid;
+            this._Exam_Type = ExamType;
+            this._Class = Class;
+            this._Maxmark = Maxmark;
+        }
+        public ExamType(string ExamType, int Class, float Maxmark)
         {
             this._Exam_Type = ExamType;
             this._Class=Class;
             this._Maxmark = Maxmark;
         }
+       
     }
 }

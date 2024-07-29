@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StudentApp
 {
@@ -20,76 +13,155 @@ namespace StudentApp
     /// </summary>
     public partial class TeacherOptions : Page
     {
-        public List<string> listclass { get; set; }
-
-        public List<string> ExamTypeList { get; set; }
-        public ObservableCollection<stud> marklist;
-
-        public TeacherOptions()
+        public List<ClassDetails> listclass { get; set; }
+      
+        public staffDetails staff;
+        public ObservableCollection<ExamType> ExamTypeList { get; set; }
+        public ObservableCollection<StudDetails> stud { get; set; }
+        private List<StudentsMarks> studmark;
+        int Staffid;
+        public staffDetails t;
+        public TeacherOptions(staffDetails t)
         {
+            this.t = t;
             InitializeComponent();
-            DataContext = this;
-            listclass = new List<string>() { "1 A", "2 C", "3 A", "4 B", "5 C"};
-            ExamTypeList = new List<string>() { "mid","end","final"};
+            Staffid = Repositories.GetStaffId(t);
+            listclass = Repositories.GetClassDetailsForStaff(Staffid);
+            this.DataContext = this;
         }
+
+        int selectedClass;
+        string selectedSection;
 
         private void changed_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            Exam_type_combobox.IsEnabled = true;
 
-        }
-
-        private void ExamType_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-            marklist = new ObservableCollection<stud>();
-            marklist.Add(new stud("1", "martin"));
-            marklist.Add(new stud("1", "martin"));
-            marklist.Add(new stud("1", "martin"));
-            marklist.Add(new stud("1", "martin"));
-            marklist.Add(new stud("1", "martin"));
-            marklist.Add(new stud("1", "martin"));
-            datagrid.ItemsSource = marklist;
-            Exam_type_combobox.IsEnabled = false;
-            mark_enty_section.IsEnabled = true;
+            Exam_type_combobox.IsEnabled = true; ;
+            if (classlist.SelectedItem != null)
+            {
+                var selectedClassDetails = classlist.SelectedItem as ClassDetails;
+                if (selectedClassDetails != null)
+                {
+                   
+                    selectedClass = selectedClassDetails.Class;
+                    selectedSection = selectedClassDetails.Section;
+                    ExamTypeList = Repositories.GetExamTypesByClass(selectedClass);
+                    examTypeComboBox.ItemsSource = ExamTypeList;
+                   
+                   
+                }
+            }
         }
 
         private void submit_Click_1(object sender, RoutedEventArgs e)
         {
-            datagrid = new DataGrid();
-            mark_enty_section.IsEnabled = false;
+            var a = examTypeComboBox.SelectedItem as ExamType;
+          
+                  
+           
+          
+            foreach (var m in studmark)
+            {
+                Repositories.InsertStudentMarks(m);
+            }
+    
+
+            // Save studmark to the database or process it as needed
+
+
+
+            stud.Clear();
+            datagrid.ItemsSource = null;
+        }
+
+        private void examTypeComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
             Exam_type_combobox.IsEnabled = false;
-            marklist.Clear();
+            mark_enty_section.IsEnabled = true;
+            //init_load();
+            studmark = GetStudentMarksWithDetails();
+            datagrid.ItemsSource = studmark;
         }
-    }
-    public class stud {
-        private string _Id;
-
-        public string Id
+        public List<StudentsMarks> GetStudentMarksWithDetails()
         {
-            get { return _Id; }
-            set { _Id = value; }
-        }
-        private string _Name;
+            var a = examTypeComboBox.SelectedItem as ExamType;
+            ObservableCollection<StudDetails> studentDetailsList = Repositories.GetStudentsByClassSection(selectedClass, selectedSection);
+            List<StudentsMarks> existingMarksList = Repositories.GetStudentMarksByCriteria(selectedClass, selectedSection, DateTime.Now.Year.ToString(), t.SubjectsTaught, a.Exam_Type);
+            List<StudentsMarks> finalMarksList = new List<StudentsMarks>();
+           
+            foreach (var student in studentDetailsList)
+            {
+                var existingMarks = existingMarksList
+                    .Where(m => m.StudId == student.Studid && m.Class == student.Class && m.Section == student.Section && m.Year == student.Year) .ToList();
 
-        public string Name
-        {
-            get { return _Name; }
-            set { _Name = value; }
-        }
-        private string _Mark;
+                // If marks are already present, use them; otherwise, create a new entry with default values
+                if (existingMarks.Count > 0)
+                {
+                    finalMarksList.AddRange(existingMarks);
+                }
+                else
+                {
+                    // If no marks exist for this student, add a default entry
+                    // You might need to adjust the following to fit your requirements
+                    finalMarksList.Add(new StudentsMarks(student.Studid, student.Class, student.Section, student.Year,t.SubjectsTaught,a.Exam_Type, student.Name, 0));
+                }
+            }
 
-        public string Mark
-        {
-            get { return _Mark; }
-            set { _Mark = value; }
+            return finalMarksList;
         }
-        public stud(string id, string name)
-        { 
-          this._Id=id;
-          this._Name=name;
-          this.Mark = "";
+        private void init_load()
+        {  var a = examTypeComboBox.SelectedItem as ExamType;
+            // Ensure examTypeComboBox.SelectedItem is not null
+        studmark = Repositories.GetStudentMarksByCriteria(selectedClass, selectedSection, DateTime.Now.Year.ToString(), t.SubjectsTaught, a.Exam_Type);
+           
+            if (a == null)
+            {
+                MessageBox.Show("Please select an exam type.");
+              
+            }
 
+            // Ensure stud is not null
+            if (stud == null)
+            {
+                MessageBox.Show("Student list is not initialized.");
+           
+            }
+
+            // Initialize studmark if it's not already initialized
+            if (studmark == null)
+            {
+                studmark = new List<StudentsMarks>();
+            }
+
+            foreach (var item in stud)
+            {
+                
+
+               
+                int _id = item.Studid;
+                int _Class = item.Class;
+                 string _s=item.Section;
+                 string _year = item.Year;
+                 string _Sub = t.SubjectsTaught;
+                 string _TypeOfExam = a.Exam_Type;
+                string _Name=item.Name;
+               
+
+                studmark.Add(new StudentsMarks
+                {
+                    StudId = _id,
+                    Class = _Class,
+                    Section = _s,
+                    Year = _year,
+                    Subject = _Sub,            // Ensure this is the correct value
+                    TypeOfExam = _TypeOfExam,              // Ensure this is the correct value
+                    Name = _Name,
+                    Mark = 0
+                });
+            }
         }
+
+
+       
     }
 }

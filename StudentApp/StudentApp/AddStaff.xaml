@@ -1,4 +1,4 @@
-﻿<Page x:Class="StudentApp.AdddStaff"
+﻿<Page x:Class="StudentApp.AddStaff"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -27,14 +27,31 @@
                             <TextBox Height="30" Width="250" x:Name="Qualification" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
-                            <TextBlock Text="JoiningYear:" FontSize="20" Height="30" Width="190"/>
+                            <TextBlock Text="Joiningdate(00/00/04):" FontSize="20" Height="30" Width="190"/>
                             <TextBox Height="30" Width="250" x:Name="joiningYear"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
                             <TextBlock Text="PreviousExperience:" FontSize="20" Height="30" Width="190"/>
                             <TextBox Height="30" Width="250" x:Name="previousExperence" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="uptoclass:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="uptoclass" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="subject:" FontSize="20" Height="30" Width="190"/>
+                            <TextBox Height="30" Width="250" x:Name="subject" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="5,0,0,10">
+                            <TextBlock Text="Select Gender:" FontSize="20" Margin="0,0,0,10" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton x:Name="MaleRadioButton" FontSize="20" Content="Male" GroupName="Gender" Margin="30,0,10,0"/>
+                                <RadioButton x:Name="FemaleRadioButton" FontSize="20" Content="Female" GroupName="Gender"/>
+                            </StackPanel>
+                        </StackPanel>
+                            
+                            <StackPanel>
                             <Button Height="30" Width="70" Content="Next" x:Name="address" Click="address_Click_1" HorizontalAlignment="Right"/>
                         </StackPanel>
 

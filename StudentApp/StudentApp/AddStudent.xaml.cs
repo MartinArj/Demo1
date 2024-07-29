@@ -19,14 +19,18 @@ namespace StudentApp
     /// </summary>
     public partial class AddStudent : Page
     {
+        public Dictionary<int, List<char>> sec { get; set; }
         StudDetails student;
         public List <int> class_No{get;set;}
         public AddStudent()
         {
             InitializeComponent();
-            class_No = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-            studCls.ItemsSource = class_No;
             
+           
+            sec = Repositories.GetClassSections();
+            class_No = new List<int>(sec.Keys);
+            studCls.ItemsSource = class_No;
+
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
@@ -37,7 +41,7 @@ namespace StudentApp
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             insertstudentDetail();
-            insertaddress(this.student);
+          
             this.NavigationService.Navigate(new AddStudent());
            
         }
@@ -62,14 +66,14 @@ namespace StudentApp
         public void insertstudentDetail()
         {
             string StudentName = studName.Text;
-            string StudentSection = studSec.Text;
+            string StudentSection = Sectionbox.SelectedItem.ToString();
             string StudentYear = studYear.Text;
             string StudentDOB = studDob.Text;
             string StudentBldGrp = studBldgrp.Text;
             int StudentClass = (int)studCls.SelectedItem;
             student = new StudDetails(StudentClass, StudentSection, StudentYear, StudentName, StudentDOB, StudentBldGrp);
             Repositories.InsertStudDetails(student);
-           
+            insertaddress(student);
         }
 
         private void add_stud_Click_1(object sender, RoutedEventArgs e)
@@ -78,6 +82,18 @@ namespace StudentApp
             AddStudent_panel.Visibility = Visibility.Collapsed;
             Stud_Address.Visibility = Visibility.Visible;
             
+        }
+
+        private void studCls_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (studCls.SelectedItem != null)
+            {
+                int selectedClass = int.Parse(studCls.SelectedItem.ToString());
+                if (sec.ContainsKey(selectedClass))
+                {
+                    Sectionbox.ItemsSource = sec[selectedClass];
+                }
+            }
         }
     }
 }

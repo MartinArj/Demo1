@@ -21,19 +21,21 @@ namespace StudentApp
             get { return _Section; }
             set { _Section = value; }
         }
-        private int _Class_Teacher;
+        private bool _IsActive;
 
-        public int Class_Teacher
+        public bool IsActive
         {
-            get { return _Class_Teacher; }
-            set { _Class_Teacher = value; }
+            get { return _IsActive; }
+            set { _IsActive = value; }
         }
-
-        public ClassDetails(int Class, string Section, int Class_Teacher)
+        public ClassDetails()
+        { 
+        }
+        public ClassDetails(int Class, string Section,bool a=true)
         {
             this._Class = Class;
             this._Section = Section;
-            this._Class_Teacher = Class_Teacher;
+            this._IsActive = a;
         }
     }
 }

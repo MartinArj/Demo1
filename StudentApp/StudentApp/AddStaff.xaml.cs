@@ -17,9 +17,9 @@ namespace StudentApp
     /// <summary>
     /// Interaction logic for AdddStaff.xaml
     /// </summary>
-    public partial class AdddStaff : Page
+    public partial class AddStaff : Page
     {
-        public AdddStaff()
+        public AddStaff()
         {
             InitializeComponent();
         }
@@ -33,7 +33,11 @@ namespace StudentApp
             string previous_Experious = previousExperence.Text;
             string Dob = dob.Text;
             string quallification = Qualification.Text;
-            staff = new staffDetails(name,Dob, quallification, joining_year, previous_Experious);
+            int upto = int.Parse(uptoclass.Text.ToString());
+            string sub = subject.Text;
+            string gender = MaleRadioButton.IsChecked == true ? "Male" : "Female";
+            bool isactive=true;
+            staff = new staffDetails(name,Dob, quallification,joining_year,previous_Experious,gender,sub,upto,isactive);
           
 
         }
@@ -99,7 +103,7 @@ namespace StudentApp
             Repositories.InsertStaffMobile(staff);
             string s = "staff id " +id+ "name "+staff.Name+ "\ncompleted";
             MessageBox.Show(s);
-            this.NavigationService.Navigate(new AdddStaff());
+            this.NavigationService.Navigate(new AddStaff());
       
         }
       private  string select;
