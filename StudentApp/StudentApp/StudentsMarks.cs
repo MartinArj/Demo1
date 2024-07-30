@@ -98,6 +98,20 @@ namespace StudentApp
                 }
             }
         }
+        private bool _Ispresent;
+
+        public bool Ispresent
+        {
+            get { return _Ispresent; }
+            set
+            {
+                if (_Ispresent != value)
+                {
+                    _Ispresent = value;
+                    OnPropertyChanged("Ispresent");
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -111,7 +125,7 @@ namespace StudentApp
         }
         public StudentsMarks() { }
 
-        public StudentsMarks(int StudId, int Class, string Section, string Year,string sub, string TypeOfExam, string Name, float Mark)
+        public StudentsMarks(int StudId, int Class, string Section, string Year,string sub, string TypeOfExam, string Name, float Mark,bool ispres)
         {
             this._StudId = StudId;
             this._Class = Class;
@@ -121,6 +135,7 @@ namespace StudentApp
             this._TypeOfExam = TypeOfExam;
             this._Name = Name;
             this._Mark = Mark;
+            this.Ispresent = ispres;
         }
  
     }

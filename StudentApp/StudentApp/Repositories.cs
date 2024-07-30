@@ -97,7 +97,7 @@ namespace StudentApp
         {
             int Class = student.Class;
             string Section = student.Section;
-            string Year = student.Year;
+            string Year = DateTime.Now.Year.ToString();
             string Name = student.Name;
             string DateOfBirth = student.DateOfBirth;
             string Blood_Group = student.Blood_Group;
@@ -744,7 +744,39 @@ namespace StudentApp
         MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 }
+      public static bool UpdateStudentMarkAndPresence(StudentsMarks studentMark)
+      {
+          string query = @"
+            UPDATE StudentMarks
+            SET Mark = @Mark, present = @Present
+            WHERE StudId = @StudId AND Class = @Class AND Section = @Section AND Year = @Year AND subjectname = @SubjectName AND examtype = @ExamType";
 
+          using (SqlConnection connection = new SqlConnection(path))
+          {
+              SqlCommand command = new SqlCommand(query, connection);
+              command.Parameters.AddWithValue("@StudId", studentMark.StudId);
+              command.Parameters.AddWithValue("@Class", studentMark.Class);
+              command.Parameters.AddWithValue("@Section", studentMark.Section);
+              command.Parameters.AddWithValue("@Year", studentMark.Year);
+              command.Parameters.AddWithValue("@SubjectName", studentMark.Subject);
+              command.Parameters.AddWithValue("@ExamType", studentMark.TypeOfExam);
+              command.Parameters.AddWithValue("@Mark", studentMark.Mark);
+              command.Parameters.AddWithValue("@Present", studentMark.Ispresent);
+
+              try
+              {
+                  connection.Open();
+                  int rowsAffected = command.ExecuteNonQuery();
+                  return rowsAffected > 0; // Return true if at least one row was updated
+              }
+              catch (Exception ex)
+              {
+                  // Handle exception (log it, rethrow it, or show message)
+                  Console.WriteLine("Error updating student marks: " + ex.Message);
+                  return false;
+              }
+          }
+      }
          
         public static void InsertStudentMarks(StudentsMarks mar)
         {
@@ -757,11 +789,11 @@ namespace StudentApp
             string examType = mar.TypeOfExam;
             string name = mar.Name;
             float mark = mar.Mark;
-
+            bool pres = mar.Ispresent;
             // SQL query with parameters
             string query = @"
-        INSERT INTO StudentMarks (StudId, Class, Section, Year, subjectname, examtype, Name, Mark)
-        VALUES (@StudId, @Class, @Section, @Year, @SubjectName, @ExamType, @Name, @Mark)";
+        INSERT INTO StudentMarks (StudId, Class, Section, Year, subjectname, examtype, Name, Mark,present)
+        VALUES (@StudId, @Class, @Section, @Year, @SubjectName, @ExamType, @Name, @Mark,@Present)";
 
             // Using statement to ensure proper resource management
             using (SqlConnection connection = new SqlConnection(path))
@@ -778,7 +810,7 @@ namespace StudentApp
                 command.Parameters.Add("@ExamType", SqlDbType.VarChar, 25).Value = examType;
                 command.Parameters.Add("@Name", SqlDbType.VarChar, 25).Value = name;
                 command.Parameters.Add("@Mark", SqlDbType.Float).Value = mark;
-
+                command.Parameters.AddWithValue("@Present", pres);
                 try
                 {
                     // Open the connection
@@ -809,7 +841,7 @@ namespace StudentApp
 
             // SQL query with parameters
             string query = @"
-            SELECT StudId, Class, Section, Year, subjectname, examtype, Name, Mark
+            SELECT StudId, Class, Section, Year, subjectname, examtype, Name, Mark,present
             FROM StudentMarks
             WHERE Class = @Class
               AND subjectname = @Subject
@@ -844,8 +876,8 @@ namespace StudentApp
                         string examTypeFromDb = reader.GetString(reader.GetOrdinal("examtype"));
                         string name = reader.GetString(reader.GetOrdinal("Name"));
                         float mark = reader.IsDBNull(reader.GetOrdinal("Mark")) ? 0 : (float)reader.GetDouble(reader.GetOrdinal("Mark"));
-
-                        StudentsMarks studentMark = new StudentsMarks(studId, @class, sectionFromDb, yearFromDb, subjectFromDb, examTypeFromDb, name, mark);
+                        bool ispres = reader.GetBoolean(reader.GetOrdinal("present"));
+                        StudentsMarks studentMark = new StudentsMarks(studId, @class, sectionFromDb, yearFromDb, subjectFromDb, examTypeFromDb, name, mark,ispres);
                         studentMarksList.Add(studentMark);
                     }
                 }

@@ -35,7 +35,8 @@ namespace StudentApp
 
         private void changed_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-
+            examTypeComboBox.ItemsSource = null;
+            datagrid.ItemsSource = null;
             Exam_type_combobox.IsEnabled = true; ;
             if (classlist.SelectedItem != null)
             {
@@ -57,12 +58,18 @@ namespace StudentApp
         {
             var a = examTypeComboBox.SelectedItem as ExamType;
           
-                  
-           
-          
             foreach (var m in studmark)
             {
-                Repositories.InsertStudentMarks(m);
+                if (existingMarksList.Any(ex => studmark.Any(cr => ex.StudId == cr.StudId)))
+                {
+                    Repositories.UpdateStudentMarkAndPresence(m);
+                    continue;
+                }
+
+                if (m.Ispresent == false || m.Mark > 0)
+                {
+                    Repositories.InsertStudentMarks(m);
+                }
             }
     
 
@@ -70,23 +77,28 @@ namespace StudentApp
 
 
 
-            stud.Clear();
+            stud = null;
             datagrid.ItemsSource = null;
         }
 
         private void examTypeComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            Exam_type_combobox.IsEnabled = false;
-            mark_enty_section.IsEnabled = true;
-            //init_load();
-            studmark = GetStudentMarksWithDetails();
-            datagrid.ItemsSource = studmark;
+            bool s = examTypeComboBox.ItemsSource != null;
+            if(s)
+            {
+                Exam_type_combobox.IsEnabled = false;
+                mark_enty_section.IsEnabled = true;
+                //init_load();
+                studmark = GetStudentMarksWithDetails();
+                datagrid.ItemsSource = studmark;
+            }
         }
+        List<StudentsMarks> existingMarksList;
         public List<StudentsMarks> GetStudentMarksWithDetails()
         {
             var a = examTypeComboBox.SelectedItem as ExamType;
             ObservableCollection<StudDetails> studentDetailsList = Repositories.GetStudentsByClassSection(selectedClass, selectedSection);
-            List<StudentsMarks> existingMarksList = Repositories.GetStudentMarksByCriteria(selectedClass, selectedSection, DateTime.Now.Year.ToString(), t.SubjectsTaught, a.Exam_Type);
+           existingMarksList = Repositories.GetStudentMarksByCriteria(selectedClass, selectedSection, DateTime.Now.Year.ToString(), t.SubjectsTaught, a.Exam_Type);
             List<StudentsMarks> finalMarksList = new List<StudentsMarks>();
            
             foreach (var student in studentDetailsList)
@@ -101,67 +113,13 @@ namespace StudentApp
                 }
                 else
                 {
-                    // If no marks exist for this student, add a default entry
-                    // You might need to adjust the following to fit your requirements
-                    finalMarksList.Add(new StudentsMarks(student.Studid, student.Class, student.Section, student.Year,t.SubjectsTaught,a.Exam_Type, student.Name, 0));
+                    finalMarksList.Add(new StudentsMarks(student.Studid, student.Class, student.Section, student.Year,t.SubjectsTaught,a.Exam_Type, student.Name, 0,true));
                 }
             }
 
             return finalMarksList;
         }
-        private void init_load()
-        {  var a = examTypeComboBox.SelectedItem as ExamType;
-            // Ensure examTypeComboBox.SelectedItem is not null
-        studmark = Repositories.GetStudentMarksByCriteria(selectedClass, selectedSection, DateTime.Now.Year.ToString(), t.SubjectsTaught, a.Exam_Type);
-           
-            if (a == null)
-            {
-                MessageBox.Show("Please select an exam type.");
-              
-            }
-
-            // Ensure stud is not null
-            if (stud == null)
-            {
-                MessageBox.Show("Student list is not initialized.");
-           
-            }
-
-            // Initialize studmark if it's not already initialized
-            if (studmark == null)
-            {
-                studmark = new List<StudentsMarks>();
-            }
-
-            foreach (var item in stud)
-            {
-                
-
-               
-                int _id = item.Studid;
-                int _Class = item.Class;
-                 string _s=item.Section;
-                 string _year = item.Year;
-                 string _Sub = t.SubjectsTaught;
-                 string _TypeOfExam = a.Exam_Type;
-                string _Name=item.Name;
-               
-
-                studmark.Add(new StudentsMarks
-                {
-                    StudId = _id,
-                    Class = _Class,
-                    Section = _s,
-                    Year = _year,
-                    Subject = _Sub,            // Ensure this is the correct value
-                    TypeOfExam = _TypeOfExam,              // Ensure this is the correct value
-                    Name = _Name,
-                    Mark = 0
-                });
-            }
-        }
-
-
        
+
     }
 }
